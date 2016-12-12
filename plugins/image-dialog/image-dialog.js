@@ -124,14 +124,13 @@
                             processData: false
                         }).then(function(json) {
                             var oldurl = $('[data-url]').val();
-                            if (oldurl === '') {
-                                $('[data-url]').val(qiniudomain + json.key);
-                            } else {
-                                oldurl = oldurl + qiniudomain + json.key;
-                                $('[data-url]').val(oldurl);
-                            }
+                            // if (oldurl === '') {
+                            $('[data-url]').val(qiniudomain + json.key);
+                            // } else {
+                            //     oldurl = oldurl + qiniudomain + json.key;
+                            //     $('[data-url]').val(oldurl);
+                            // }
                             fileNo++;
-
                             Qiniu_upload(files[fileNo], length, fileNo);
                         }, function (err) {
                             console.log(err);
@@ -158,7 +157,15 @@
                         return false;
                     }
                     loading(true);
-                    dialog.find('[type="submit"]').bind("click", submitHandler).trigger("click");
+                    var submitBtn = dialog.find('[type="submit"]');
+                    var into = false;
+                    submitBtn.on("click", function (e) {
+                      if (!into) {
+                        submitHandler();
+                        e.preventDefault();
+                        into = true
+                      }
+                    }).trigger("click");
                 })
             }
             dialog = editor.find('.' + dialogName);
