@@ -26,7 +26,6 @@
             var linkLang    = lang.dialog.link;
             var classPrefix = this.classPrefix;
             var dialogName  = classPrefix + pluginName, dialog;
-            lang.buttons.chooseArticle = "选择文章";
 
             cm.focus();
 
@@ -63,25 +62,9 @@
                         opacity         : settings.dialogMaskOpacity,
                         backgroundColor : settings.dialogMaskBgColor
                     },
-                    buttons: {
-                        chooseArticle : [lang.buttons.chooseArticle, function(e){
-                          this.hide();
-                          this.hideMask();
-                          e.stopPropagation();
-                          e.preventDefault();
-                          settings.articleService.selectArticle().$promise.then((response) => {
-                            var articleid = response.id;
-                            var articleTitle = response.title;
-                            var articleUrl = settings.articleService.getUrl(response);
-                            this.show();
-                            this.find("[data-url]").val(articleUrl);
-                            this.find("[data-title]").val(articleTitle);
-                          }, () => {
-                            this.show();
-                          });
-                        }],
+                    buttons    : {
 
-                        enter: [lang.buttons.enter, function() {
+                        enter  : [lang.buttons.enter, function() {
                             var url   = this.find("[data-url]").val();
                             var title = this.find("[data-title]").val();
 
@@ -111,8 +94,9 @@
                             return false;
                         }],
 
-                        cancel: [lang.buttons.cancel, function() {
+                        cancel : [lang.buttons.cancel, function() {
                             this.hide().lockScreen(false).hideMask();
+
                             return false;
                         }]
                     }

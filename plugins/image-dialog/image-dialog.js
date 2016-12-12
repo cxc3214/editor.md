@@ -98,9 +98,9 @@
                 }
                 var Qiniu_upload = function(files, length, i) {
                     if (length > i) {
-                        settings.upload.upload().$promise.then((response) => {
-                          settings.uptoken = response.data.uptoken;
-                          settings.domain = response.data.domain;
+                        settings.upload.loadUptoken().then((response) => {
+                          settings.uptoken = response.uptoken;
+                          settings.domain = response.domain;
                           uploadFile(files, settings.uptoken, i);
                         });
 
