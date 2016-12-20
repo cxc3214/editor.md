@@ -27,20 +27,43 @@
 ```
 </textarea>
             </div>
+
+            <div id="test-editormd2">                
+                
+            </div>
         </div>        
         <script src="js/jquery.min.js"></script>
         <script src="../editormd.js"></script>   
         <script type="text/javascript">
             var testEditor;
-            
             $(function() {
-                testEditor = editormd("test-editormd", {
+                this.a = '11';
+                var that = this;
+                console.log(that.a, this.a)
+                var options = {
                     width  : "90%",
+                    a: Math.random()*1000,
                     height : 720,
                     path   : '../lib/',
-                    onchange : function() {
-                        $("#output").html("onchange : this.id =>" + this.id + ", markdown =>" + this.getValue());
-                        console.log("onchange =>", this, this.id, this.settings, this.state);
+                    onload: function() {
+                        console.log('editor..id..',this.settings.a, this)
+                    }
+                }
+                editormd("test-editormd", {
+                    author: 'mengjia',
+                    width  : "90%",
+                    a: Math.random()*1000,
+                    height : 720,
+                    path   : '../lib/'
+                });
+                editormd("test-editormd2", {
+                    width  : "90%",
+                    a: Math.random()*1000,
+                    height : 720,
+                    path   : '../lib/',
+                    recreate: true,
+                    onload: function() {
+                        console.log(this.settings.author)
                     }
                 });
             });

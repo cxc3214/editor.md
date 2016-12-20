@@ -117,7 +117,7 @@
                       var qiniudomain = settings.domain + '/';
                         $.ajax({
                             type: 'POST',
-                            url: 'http://upload.qiniu.com',
+                            url: window.location.protocol === 'https:' ? 'https://up.qbox.me' : 'http://upload.qiniu.com',
                             data: formdata,
                             dataType: 'json',
                             contentType: false,
